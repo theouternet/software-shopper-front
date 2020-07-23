@@ -18,13 +18,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
+        <TopNav>
+          <TopNav.Header>
+            <TopNav.Brand>
               <a href="#">Software Shopper</a>
-            </Navbar.Brand>
-          </Navbar.Header>
-        </Navbar>
+            </TopNav.Brand>
+          </TopNav.Header>
+        </TopNav>
         <SoftwareList softwarePics={this.props.softwarePics}/>
       </div>
     );
