@@ -1,37 +1,40 @@
-import React from 'react';
-import { Route, Switch, withRouter, Redirect} from "react-router-dom";
+import React, { Component } from 'react';
+import {Navbar} from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-import './App.css';
-
-import HomePg from "./components/HomePgContainer"
-import TopNav from "./components/TopNav"
-import ListPg from "./components/ListPgContainer"
-import DetailPg from "./components/DetailPgContainer"
+import { fetchSoftware } from './actions/actions';
+import SoftwareList from './components/ResultsContainer';
+//
 
 
-class App extends React.Component {
+class App extends Component {
 
-
-  render(){
-    return (
-      <div className="App">
-        < TopNav />
-        <Switch>
-          < Route exact path="/" render={() => <Redirect to="/home"/>}/>
-          < Route exact path="/home" component={HomePg}/>
-          < Route exact path="/list" component={ListPg}/>
-          < Route exact path="/list/:id" render={(props) => {
-            let softwareID = props.match.params.id 
-              return < DetailPg softwareId={softwareID}/>
-          }}/>
-
-        </Switch>
-      </div>
-    )
-
-
+  componentDidMount() {
+    this.props.fetchCats();
   }
 
+
+  //edit Navbar + header/brand__
+  render() {
+    return (
+      <div className="App">
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">Software Shopper</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <SoftwareList softwarePics={this.props.softwarePics}/>
+      </div>
+    );
+  }
 }
 
-export default withRouter(App);
+const mapStateToProps = state => {
+  return {
+    softwarePics: state.software.pictures
+  };
+}
+
+export default connect(mapStateToProps, { fetchSoftware })(App);
