@@ -10,7 +10,7 @@ import SoftwareList from './components/ResultsContainer';
 class App extends Component {
 
   componentDidMount() {
-    this.props.fetchCats();
+    this.props.fetchSoftware();
   }
 
 

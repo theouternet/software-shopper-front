@@ -1,32 +1,20 @@
 import React from "react";
+
 import SearchFilterContainer from "./SearchFilterContainer"
 import ResultBoxPreso from "./ResultBoxPreso"
 import { connect } from "react-redux"
 
-class ResultsContainer extends React.Component {
 
-    render(){
-        return (
-            <div className="results-container"> 
-                <div className="results-filter">
-                    < SearchFilterContainer /> 
-                </div>
-
-                <div className="results-section">
-                    {this.props.software.map(software => {
-                        return < ResultBoxPreso key={software.id} softwareObj={software}/>
-                    })} 
-                </div>
-            </div>
-        )
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        software: state.softwareState
-    }
-}
-
-
-export default connect(mapStateToProps)(ResultsContainer)
+const SoftwareList = ({ softwarePics }) => {
+    const renderSoftware = softwarePics.map(softwarePic =>
+      <img key={softwarePic.id} src={softwarePic.url} />
+    );
+  
+    return (
+      <div>
+        {renderSoftware}
+      </div>
+    );
+  };
+  
+  export default SoftwareList;
