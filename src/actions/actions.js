@@ -1,15 +1,20 @@
-// import __ from __
+export function fetchSoftware() {
 
-let HOST_URL = "http://localhost:3001"
-
-
-function searchResults(software){
-    return {type: "SEARCH_RESULTS", payload: software}
-}
-
-function modifySearch(text){
-    return {type: "MODIFY_SEARCH", payload: text}
-}
-
-
-export { searchResults, modifySearch }
+    return function(dispatch){
+      dispatch({type: 'LOADING_SOFTWARE'})
+      return fetch('http://localhost:4000/db')
+        .then(res => {
+          return res.json()
+        }).then(responseJson => {
+          dispatch({type: 'FETCH_SOFTWARE', payload: responseJson.images})
+      })
+  
+    }
+  }
+  
+  export function loadingSoftware(){
+    return {
+      type: 'LOADING_SOFTWARE',
+      payload : []
+    };
+  };
